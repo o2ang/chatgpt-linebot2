@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   const data = await response.json();
-
+  console.log("GPT response data:", data);
   const reply = data.choices?.[0]?.message?.content || "No response";
 
   res.status(200).json({ reply });
