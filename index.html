@@ -26,7 +26,7 @@
         });
 
         const data = await res.json();
-        responseDiv.innerText = "ChatGPTの返事: " + (data.reply || "エラーだよ💦");
+        responseDiv.innerText = "ChatGPTの返事: エラー！ " + (data.detail || "詳細はconsoleを見てね💦");
       });
     </script>
   </body>
