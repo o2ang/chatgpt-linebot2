@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat bot TEST</title>
+    <title>おーにゃんBotとおしゃべり💬</title>
   </head>
   <body>
-    <h1>Chat bot TEST</h1>
-    <form method="POST" action="/api/chat">
-      <input name="message" placeholder="Talk to GPT" />
-      <button type="submit">Send</button>
+    <h1>おーにゃん × ChatGPT✨</h1>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="話しかけてみてね" required />
+      <button type="submit">送信</button>
     </form>
+    <div id="response"></div>
+
+    <script>
+      document.getElementById("chat-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const input = document.getElementById("user-input").value;
+        const responseDiv = document.getElementById("response");
+
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input }),
+        });
+
+        const data = await res.json();
+        responseDiv.innerText = "ChatGPTの返答: " + (data.reply || "エラーだよ💦");
+      });
+    </script>
   </body>
 </html>
-g
